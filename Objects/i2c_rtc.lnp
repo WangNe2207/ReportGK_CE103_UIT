@@ -1,0 +1,8 @@
+".\Objects\delay.obj",
+".\Objects\ds1307.obj",
+".\Objects\i2c.obj",
+".\Objects\lcd.obj",
+".\Objects\main.obj",
+".\Objects\Keypad4x4.obj" 
+TO ".\Objects\i2c_rtc" 
+PRINT(".\Listings\i2c_rtc.m51") RAMSIZE(256) 

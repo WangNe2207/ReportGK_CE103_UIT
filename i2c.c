@@ -15,7 +15,7 @@ void i2c_Clock(void)
     SCL = 0;        
 }
  
-  
+// khi start I2C phai hoan thanh het 1 chu ky
 void i2c_Start()
 {
     SCL = 0;        // pull SCL low
@@ -46,11 +46,10 @@ void i2c_Stop(void)
  
     SDA = 1;            // Now pull SDA High, to generate the Stop Condition
 }
-
+// gui tung bit 1 
 void i2c_Write(unsigned char dat)
 {
     unsigned char i;
- 
     for(i=0;i<8;i++)         
      {
         SDA = dat & 0x80;    
@@ -64,18 +63,18 @@ unsigned char i2c_Read(void)
 {
     unsigned char i, dat=0x00;
  
-       SDA=1;               
+    SDA=1;   // gui bit R/W len 1 => mode Read            
     for(i=0;i<8;i++)       
-     {
+    {
        delay_us(50);
-        SCL = 1;           
-        delay_us(50);
+       SCL = 1;           
+       delay_us(50);
  
-        dat = dat<<1;       
-        dat = dat | SDA;    
+       dat = dat<<1;       
+       dat = dat | SDA;    
  
-        SCL = 0;            
-       }
+       SCL = 0;            
+    }
    return dat;             
 }
 

@@ -4,6 +4,6 @@
  
 void delay_us(unsigned int us_count);
 void delay_ms(long int k);
-void delay_sec(unsigned char sec_count);
+//void delay_sec(unsigned char sec_count);
  
 #endif

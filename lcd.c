@@ -1,41 +1,43 @@
 #include<reg51.h>
 #include "lcd.h"
 #include "delay.h"
-#define dataport P3       // LCD dataport connected to PORT1
-sbit rs= dataport^0;      // Register select pin connected to P1.0
-sbit rw= dataport^1;      // Read Write pin connected to P1.1
-sbit en= dataport^2;      // Enable pin connected to P1.2
-/* 16x2 lcd Specification */
+#define dataport P0       
+sbit rs= dataport^0;    
+sbit rw= dataport^1;      
+sbit en= dataport^2;      
+
 #define LCDMaxLines 2
 #define LCDMaxChars 16
 #define LineOne 0x80
 #define LineTwo 0xc0 
 #define BlankSpace ' '
-//LCD initilization
+//Khoi dong LCD
 void LCD_Init()
 {
+	// xem them trong tap lenh LCD1602
     delay_us(5000);
-   lcd_WriteCmd(0x02);  //initilize the LCD in 4bit Mode
-   lcd_WriteCmd(0x28);
-   lcd_WriteCmd(0x0C);  // display ON cursor ON
+   lcd_WriteCmd(0x20);  // chon che do 4 bit
+   lcd_WriteCmd(0x28);  // chon su dung 2 dong
+   lcd_WriteCmd(0x0C);  // display ON cursor OFF blink OFF
    lcd_WriteCmd(0x01);  // clear the LCD
-   lcd_WriteCmd(0x80);  // move the Cursor to First line First Position
+   //lcd_WriteCmd(0x80);  // move the Cursor to First line First Position
  
 }
- 
- 
 // lcd Write command function
+//cac buoc gui command
+//Buoc 1: Keo RW RS xuong 0
+//Buoc 2: Keo en len 1 de chot du lieu
+//Buoc 3: Keo en xuong 0 
 void lcd_WriteCmd( char a)
 {
- 
-   dataport=(a & 0xf0);        
+   dataport=(a & 0xf0);        //Gui 4 bit cao truoc
    rs=0;                      
    rw=0;                 
  	 en=1;                 
    delay_us(1);
    en=0;
    delay_us(1);                  
-   dataport=((a<<4) & 0xf0);   
+   dataport=((a<<4) & 0xf0);   // gui 4 bit thap sau
    rs=0;                    
    rw=0;                    
    en=1;                      
@@ -43,13 +45,11 @@ void lcd_WriteCmd( char a)
    en=0;
    delay_us(1);
 }
- 
- 
  // lcd writedata function
+//cac buoc de gui data
+// tuong tu nhu gui command nhung RS kich len 1 thay vi 0 o command
 void lcd_Writedata( char a)
 {
- 
- 
    dataport=(a & 0xf0);        
      rs=1;                      
      rw=0;                      
@@ -75,6 +75,10 @@ void lcd_Writedata( char a)
 void lcd_Line_posnY()
 {
    lcd_WriteCmd(LineTwo);   // move the Cursor to Second line First Position
+}
+void lcd_Line_posnX()
+{
+   lcd_WriteCmd(LineOne);   // move the Cursor to First line First Position
 }
  
  
@@ -103,8 +107,8 @@ void lcd_DisplayString(char *string_ptr)
 {
    while(*string_ptr)
     lcd_Writedata(*string_ptr++);
-    }
- 
+}
+
  
 //lcd display rtc time function
 void lcd_DisplayRtcTime(char hour,char min,char sec)

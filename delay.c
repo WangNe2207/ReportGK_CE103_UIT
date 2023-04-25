@@ -1,19 +1,17 @@
-
- 
 #include<reg51.h>
 #include "delay.h" 
  
 void delay_us(unsigned int us_count)
- {  
+{  
     while(us_count!=0)
       {
          us_count--;
        }
    }
  
-	 void Delay_ms(long int k)
+void Delay_ms(long int k)
 {
-		int i;
+	int i;
 	TMOD=0X02;
 	TH0=0x00;
 	while(k!=0)
