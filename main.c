@@ -27,6 +27,7 @@ void ModeWatchTime(unsigned char sec,unsigned char min,unsigned char hour,unsign
 	    //delay_ms(1000);
 			ds1307_GetTime(&hour,&min,&sec);        
 			lcd_curser_posn(0,6); 		 
+			//lcd_DisplayRtcTime(0x12,0x20,0x30);
 			lcd_DisplayRtcTime(hour,min,sec);
 			ds1307_GetDate(&day,&month,&year);        
 			lcd_curser_posn(1,6);
@@ -35,7 +36,6 @@ void ModeWatchTime(unsigned char sec,unsigned char min,unsigned char hour,unsign
 }
 void ModeSetTime(unsigned char *button)
 {
-		
 		if(loop2 == 1)
 		{
 			lcd_Clear();

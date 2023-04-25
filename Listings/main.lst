@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              04/25/2023 16:14:55 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              04/25/2023 21:57:25 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
@@ -38,15 +38,15 @@ line level    source
   27   1            //delay_ms(1000);
   28   1            ds1307_GetTime(&hour,&min,&sec);        
   29   1            lcd_curser_posn(0,6);      
-  30   1            lcd_DisplayRtcTime(hour,min,sec);
-  31   1            ds1307_GetDate(&day,&month,&year);        
-  32   1            lcd_curser_posn(1,6);
-  33   1            lcd_DisplayRtcDate(day,month,year);
-  34   1            delay_ms(1000);
-  35   1      }
-  36          void ModeSetTime(unsigned char *button)
-  37          {
-  38   1          
+  30   1            //lcd_DisplayRtcTime(0x12,0x20,0x30);
+  31   1            lcd_DisplayRtcTime(hour,min,sec);
+  32   1            ds1307_GetDate(&day,&month,&year);        
+  33   1            lcd_curser_posn(1,6);
+  34   1            lcd_DisplayRtcDate(day,month,year);
+  35   1            delay_ms(1000);
+  36   1      }
+  37          void ModeSetTime(unsigned char *button)
+  38          {
   39   1          if(loop2 == 1)
   40   1          {
   41   2            lcd_Clear();
@@ -62,7 +62,7 @@ line level    source
   51   1          *button = get_key();
   52   1          if(*button>0)
   53   1          {
-C51 COMPILER V9.60.7.0   MAIN                                                              04/25/2023 16:14:55 PAGE 2   
+C51 COMPILER V9.60.7.0   MAIN                                                              04/25/2023 21:57:25 PAGE 2   
 
   54   2            SingleTimeInput++;
   55   2            //lan nhap thu 1
@@ -126,7 +126,7 @@ line level    source
  113   3              {
  114   4                OperandPointer = &Sec;
  115   4              }
-C51 COMPILER V9.60.7.0   MAIN                                                              04/25/2023 16:14:55 PAGE 3   
+C51 COMPILER V9.60.7.0   MAIN                                                              04/25/2023 21:57:25 PAGE 3   
 
  116   3              if((*button != 4)&&(*button !=8)&&(*button != 12)&&(*button != 16)&&(*button != 15)&&(*button != 13))
  117   3              {
@@ -190,7 +190,7 @@ line level    source
  175   1          {
  176   2            if(Mode ==0)
  177   2            {
-C51 COMPILER V9.60.7.0   MAIN                                                              04/25/2023 16:14:55 PAGE 4   
+C51 COMPILER V9.60.7.0   MAIN                                                              04/25/2023 21:57:25 PAGE 4   
 
  178   3              ModeWatchTime(sec,min,hour,day,month,year);
  179   3            }

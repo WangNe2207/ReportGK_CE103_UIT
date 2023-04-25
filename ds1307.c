@@ -72,7 +72,7 @@ void ds1307_GetTime(unsigned char *h_ptr,unsigned char *m_ptr,unsigned char *s_p
  
    ds1307_Write(DS1307_ID);    
    ds1307_Write(SEC_ADDRESS);          
- 
+
    i2c_Stop();            
  
    i2c_Start();               

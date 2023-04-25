@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   DS1307                                                            04/10/2023 13:50:05 PAGE 1   
+C51 COMPILER V9.60.7.0   DS1307                                                            04/25/2023 21:50:16 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE DS1307
@@ -62,7 +62,7 @@ line level    source
   51   1           
   52   1          i2c_Stop();             // Stop i2c communication after Setting the Time
   53   1      }
-C51 COMPILER V9.60.7.0   DS1307                                                            04/10/2023 13:50:05 PAGE 2   
+C51 COMPILER V9.60.7.0   DS1307                                                            04/25/2023 21:50:16 PAGE 2   
 
   54          
   55          void ds1307_SetDate(unsigned char dd, unsigned char mm, unsigned char yy)
@@ -85,7 +85,7 @@ line level    source
   72   1       
   73   1         ds1307_Write(DS1307_ID);    
   74   1         ds1307_Write(SEC_ADDRESS);          
-  75   1       
+  75   1      
   76   1         i2c_Stop();            
   77   1       
   78   1         i2c_Start();               
@@ -126,7 +126,7 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-C51 COMPILER V9.60.7.0   DS1307                                                            04/10/2023 13:50:05 PAGE 3   
+C51 COMPILER V9.60.7.0   DS1307                                                            04/25/2023 21:50:16 PAGE 3   
 
    DATA SIZE        =   ----      27
    IDATA SIZE       =   ----    ----

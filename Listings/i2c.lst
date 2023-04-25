@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   I2C                                                               04/09/2023 19:34:22 PAGE 1   
+C51 COMPILER V9.60.7.0   I2C                                                               04/25/2023 21:50:16 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE I2C
@@ -62,7 +62,7 @@ line level    source
   52   1          unsigned char i;
   53   1          for(i=0;i<8;i++)         
   54   1           {
-C51 COMPILER V9.60.7.0   I2C                                                               04/09/2023 19:34:22 PAGE 2   
+C51 COMPILER V9.60.7.0   I2C                                                               04/25/2023 21:50:16 PAGE 2   
 
   55   2              SDA = dat & 0x80;    
   56   2              i2c_Clock();         
