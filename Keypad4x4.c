@@ -12,12 +12,12 @@
 #define row2	P2_6
 #define row3	P2_7
 
-unsigned char check_but(){ //Kiem tra nut nhan
+unsigned char check_but(){                           //Kiem tra nut nhan
 	row0=row1=row2=row3=0;
 	if(!col0 || !col1 || !col2 || !col3 )return 1;
 	return 0;
 }
-void scan_row(unsigned char r){ //Quet hang
+void scan_row(unsigned char r){                         //Quet hang
 	row0=row1=row2=row3=1;
 	if(r==0)row0=0;
 	else if(r==1)row1=0;
@@ -32,22 +32,22 @@ unsigned char check_col(){ //Kiem tra cot
 	else if(!col3)c=4;
 	return c;
 }
-unsigned char get_key(){  //Ham tra ve vi tri nut 1-16, =0 la khong nhan
+unsigned char get_key(){                                           //Ham tra ve vi tri nut 1-16, =0 la khong nhan
 	unsigned char row,col;
     if(check_but())
 		{
       delay_ms(10);
       if(check_but()){         
          for(row=0;row<4;row++){            
-            scan_row(row); //Quet hang
-			col=check_col(); //Lay vi tri cot
-			if(col>0)return ((row*4)+col); //Tra ve vi tri nut duoc nhan
+            scan_row(row);                                           //Quet hang
+			col=check_col();                                               //Lay vi tri cot
+			if(col>0)return ((row*4)+col);                                 //Tra ve vi tri nut duoc nhan
          }      
       }
    }
-   return 0; //Khong co nut nao duoc nhan hoac nut da nha	  
+   return 0;                                                           //Khong co nut nao duoc nhan hoac nut da nha	  
 }
-unsigned char code ma_nut[16]={ //Khai bao mang nut nhan
+unsigned char code ma_nut[16]={                       //Khai bao mang nut nhan
 	'7','8','9',':',
 	'4','5','6','x',
 	'1','2','3','-',
@@ -55,7 +55,7 @@ unsigned char code ma_nut[16]={ //Khai bao mang nut nhan
 };
 void show_button(unsigned char key){
 	 //lcd_DisplayString("Key  ");
-	 lcd_Writedata(ma_nut[key-1]); //Xuat ra vi tri nut nhan
+	 lcd_Writedata(ma_nut[key-1]);                 //Xuat ra vi tri nut nhan
 }
 void num_generator(int key, int *OperandPointer)
 {

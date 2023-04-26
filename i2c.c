@@ -18,33 +18,23 @@ void i2c_Clock(void)
 // khi start I2C phai hoan thanh het 1 chu ky
 void i2c_Start()
 {
-    SCL = 0;        // pull SCL low
- 
-    SDA = 1;        // pull SDA High
-    delay_us(50);
- 
-    SCL = 1;        //pull SCL high
-    delay_us(50);
- 
-    SDA = 0;        //Now pull SDA LOW, to generate the Start Condition
-    delay_us(50);
- 
-    SCL = 0;        //Finally Clear the SCL to complete the cycle
+		SDA=1;
+		SCL=1;
+		delay_us(50);
+		SDA=0;
+		delay_us(50);
+		SCL=0;
 }
 
  
 void i2c_Stop(void)
-{
-    SCL = 0;            // pull SCL low
-    delay_us(50);
- 
-    SDA = 0;            // pull SDA  low
-    delay_us(50);
- 
-    SCL = 1;            // pull SCL High
-    delay_us(50);
- 
-    SDA = 1;            // Now pull SDA High, to generate the Stop Condition
+{	
+		SDA=0;                 // Stop processing //
+		SCL=1;                 //clock is 1//
+		delay_us(50);
+		SDA=1;                 //Stopped//
+		delay_us(50);
+		SCL=0;                 //clock signal is 0//
 }
 // gui tung bit 1 
 void i2c_Write(unsigned char dat)

@@ -56,18 +56,14 @@ void lcd_Writedata( char a)
      en=1;                      
     delay_us(1);
      en=0;
- 
    delay_us(1);                
- 
    dataport=((a <<4) & 0xf0);  
      rs=1;                    
      rw=0;                     
      en=1;                      
     delay_us(1);
      en=0;
- 
    delay_us(1);
- 
 }
 
  

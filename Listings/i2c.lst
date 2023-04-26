@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   I2C                                                               04/25/2023 21:50:16 PAGE 1   
+C51 COMPILER V9.60.7.0   I2C                                                               04/26/2023 19:52:06 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE I2C
@@ -28,85 +28,75 @@ line level    source
   18          // khi start I2C phai hoan thanh het 1 chu ky
   19          void i2c_Start()
   20          {
-  21   1          SCL = 0;        // pull SCL low
-  22   1       
-  23   1          SDA = 1;        // pull SDA High
-  24   1          delay_us(50);
-  25   1       
-  26   1          SCL = 1;        //pull SCL high
-  27   1          delay_us(50);
-  28   1       
-  29   1          SDA = 0;        //Now pull SDA LOW, to generate the Start Condition
-  30   1          delay_us(50);
-  31   1       
-  32   1          SCL = 0;        //Finally Clear the SCL to complete the cycle
-  33   1      }
-  34          
-  35           
-  36          void i2c_Stop(void)
-  37          {
-  38   1          SCL = 0;            // pull SCL low
-  39   1          delay_us(50);
-  40   1       
-  41   1          SDA = 0;            // pull SDA  low
-  42   1          delay_us(50);
-  43   1       
-  44   1          SCL = 1;            // pull SCL High
-  45   1          delay_us(50);
-  46   1       
-  47   1          SDA = 1;            // Now pull SDA High, to generate the Stop Condition
-  48   1      }
-  49          // gui tung bit 1 
-  50          void i2c_Write(unsigned char dat)
-  51          {
-  52   1          unsigned char i;
-  53   1          for(i=0;i<8;i++)         
-  54   1           {
-C51 COMPILER V9.60.7.0   I2C                                                               04/25/2023 21:50:16 PAGE 2   
+  21   1          SDA=1;
+  22   1          SCL=1;
+  23   1          delay_us(50);
+  24   1          SDA=0;
+  25   1          delay_us(50);
+  26   1          SCL=0;
+  27   1      }
+  28          
+  29           
+  30          void i2c_Stop(void)
+  31          { 
+  32   1          SDA=0;                 // Stop processing //
+  33   1          SCL=1;                 //clock is 1//
+  34   1          delay_us(50);
+  35   1          SDA=1;                 //Stopped//
+  36   1          delay_us(50);
+  37   1          SCL=0;                 //clock signal is 0//
+  38   1      }
+  39          // gui tung bit 1 
+  40          void i2c_Write(unsigned char dat)
+  41          {
+  42   1          unsigned char i;
+  43   1          for(i=0;i<8;i++)         
+  44   1           {
+  45   2              SDA = dat & 0x80;    
+  46   2              i2c_Clock();         
+  47   2              dat = dat<<1;
+  48   2            }
+  49   1              SDA = 1;                 
+  50   1      }
+  51          
+  52          unsigned char i2c_Read(void)
+  53          {
+  54   1          unsigned char i, dat=0x00;
+C51 COMPILER V9.60.7.0   I2C                                                               04/26/2023 19:52:06 PAGE 2   
 
-  55   2              SDA = dat & 0x80;    
-  56   2              i2c_Clock();         
-  57   2              dat = dat<<1;
-  58   2            }
-  59   1              SDA = 1;                 
-  60   1      }
-  61          
-  62          unsigned char i2c_Read(void)
-  63          {
-  64   1          unsigned char i, dat=0x00;
-  65   1       
-  66   1          SDA=1;   // gui bit R/W len 1 => mode Read            
-  67   1          for(i=0;i<8;i++)       
-  68   1          {
-  69   2             delay_us(50);
-  70   2             SCL = 1;           
-  71   2             delay_us(50);
-  72   2       
-  73   2             dat = dat<<1;       
-  74   2             dat = dat | SDA;    
-  75   2       
-  76   2             SCL = 0;            
-  77   2          }
-  78   1         return dat;             
-  79   1      }
-  80          
-  81          void i2c_Ack()
-  82          {
-  83   1          SDA = 0;        
-  84   1          i2c_Clock();    
-  85   1          SDA = 1;        
-  86   1      }
-  87          
-  88          void i2c_NoAck()
-  89          {
-  90   1          SDA = 1;        
-  91   1         i2c_Clock();     
-  92   1          SCL = 1;     
-  93   1      }
+  55   1       
+  56   1          SDA=1;   // gui bit R/W len 1 => mode Read            
+  57   1          for(i=0;i<8;i++)       
+  58   1          {
+  59   2             delay_us(50);
+  60   2             SCL = 1;           
+  61   2             delay_us(50);
+  62   2       
+  63   2             dat = dat<<1;       
+  64   2             dat = dat | SDA;    
+  65   2       
+  66   2             SCL = 0;            
+  67   2          }
+  68   1         return dat;             
+  69   1      }
+  70          
+  71          void i2c_Ack()
+  72          {
+  73   1          SDA = 0;        
+  74   1          i2c_Clock();    
+  75   1          SDA = 1;        
+  76   1      }
+  77          
+  78          void i2c_NoAck()
+  79          {
+  80   1          SDA = 1;        
+  81   1         i2c_Clock();     
+  82   1          SCL = 1;     
+  83   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    177    ----
+   CODE SIZE        =    161    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

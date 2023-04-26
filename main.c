@@ -24,10 +24,8 @@ void ModeWatchTime(unsigned char sec,unsigned char min,unsigned char hour,unsign
 			lcd_DisplayString(" Time:");
 	    lcd_Line_posnY();
       lcd_DisplayString(" Date:");
-	    //delay_ms(1000);
 			ds1307_GetTime(&hour,&min,&sec);        
 			lcd_curser_posn(0,6); 		 
-			//lcd_DisplayRtcTime(0x12,0x20,0x30);
 			lcd_DisplayRtcTime(hour,min,sec);
 			ds1307_GetDate(&day,&month,&year);        
 			lcd_curser_posn(1,6);
@@ -80,11 +78,6 @@ void ModeSetTime(unsigned char *button)
 				{
 					OperandPointer = &Min;
 				}
-				if((*button != 4)&&(*button !=8)&&(*button != 12)&&(*button != 16)&&(*button != 15)&&(*button != 13))
-				{
-					num_generator(*button,OperandPointer);
-
-				}
 			}
 			//lan nhap thu 4
 			if(SingleTimeInput==4)
@@ -113,10 +106,10 @@ void ModeSetTime(unsigned char *button)
 				{
 					OperandPointer = &Sec;
 				}
-				if((*button != 4)&&(*button !=8)&&(*button != 12)&&(*button != 16)&&(*button != 15)&&(*button != 13))
-				{
-					num_generator(*button,OperandPointer);
-				}
+				//if((*button != 4)&&(*button !=8)&&(*button != 12)&&(*button != 16)&&(*button != 15)&&(*button != 13))
+				//{
+				//	num_generator(*button,OperandPointer);
+				//}
 			}
 			//lan nhap thu 7
 			if(SingleTimeInput==7)
@@ -147,6 +140,10 @@ void ModeSetTime(unsigned char *button)
 					loop = 1;
 					loop2 =1;
 					ds1307_SetTime(Convert(Hour),Convert(Min),Convert(Sec)); 
+					Hour = 0;
+					Min = 0;
+					Sec = 0;
+					OperandPointer = &Hour;
 					lcd_Clear();
 					Mode = 0;
 				}
@@ -190,4 +187,4 @@ void main()
 void ISR_EX0 (void) interrupt 0
 {
 	Mode++;
-} 
+}

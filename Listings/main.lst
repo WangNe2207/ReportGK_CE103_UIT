@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              04/25/2023 21:57:25 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              04/26/2023 23:03:42 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
@@ -35,183 +35,181 @@ line level    source
   24   1            lcd_DisplayString(" Time:");
   25   1            lcd_Line_posnY();
   26   1            lcd_DisplayString(" Date:");
-  27   1            //delay_ms(1000);
-  28   1            ds1307_GetTime(&hour,&min,&sec);        
-  29   1            lcd_curser_posn(0,6);      
-  30   1            //lcd_DisplayRtcTime(0x12,0x20,0x30);
-  31   1            lcd_DisplayRtcTime(hour,min,sec);
-  32   1            ds1307_GetDate(&day,&month,&year);        
-  33   1            lcd_curser_posn(1,6);
-  34   1            lcd_DisplayRtcDate(day,month,year);
-  35   1            delay_ms(1000);
-  36   1      }
-  37          void ModeSetTime(unsigned char *button)
-  38          {
-  39   1          if(loop2 == 1)
-  40   1          {
-  41   2            lcd_Clear();
-  42   2            loop2--;
-  43   2          }
-  44   1          if(loop == 1)
-  45   1          {
-  46   2            lcd_Line_posnX();
-  47   2            lcd_DisplayString(" Set Your Time: ");
-  48   2            lcd_Line_posnY();
-  49   2            loop--;
-  50   2          }
-  51   1          *button = get_key();
-  52   1          if(*button>0)
-  53   1          {
-C51 COMPILER V9.60.7.0   MAIN                                                              04/25/2023 21:57:25 PAGE 2   
+  27   1            ds1307_GetTime(&hour,&min,&sec);        
+  28   1            lcd_curser_posn(0,6);      
+  29   1            lcd_DisplayRtcTime(hour,min,sec);
+  30   1            ds1307_GetDate(&day,&month,&year);        
+  31   1            lcd_curser_posn(1,6);
+  32   1            lcd_DisplayRtcDate(day,month,year);
+  33   1            delay_ms(1000);
+  34   1      }
+  35          void ModeSetTime(unsigned char *button)
+  36          {
+  37   1          if(loop2 == 1)
+  38   1          {
+  39   2            lcd_Clear();
+  40   2            loop2--;
+  41   2          }
+  42   1          if(loop == 1)
+  43   1          {
+  44   2            lcd_Line_posnX();
+  45   2            lcd_DisplayString(" Set Your Time: ");
+  46   2            lcd_Line_posnY();
+  47   2            loop--;
+  48   2          }
+  49   1          *button = get_key();
+  50   1          if(*button>0)
+  51   1          {
+  52   2            SingleTimeInput++;
+  53   2            //lan nhap thu 1
+C51 COMPILER V9.60.7.0   MAIN                                                              04/26/2023 23:03:42 PAGE 2   
 
-  54   2            SingleTimeInput++;
-  55   2            //lan nhap thu 1
-  56   2            if(SingleTimeInput==1)
-  57   2            {
-  58   3              show_button(*button);
-  59   3      
-  60   3              if((*button != 4)&&(*button !=8)&&(*button != 12)&&(*button != 16)&&(*button != 15)&&(*button != 13))
-  61   3              {
-  62   4                num_generator(*button,OperandPointer);
-  63   4              }
-  64   3            }
-  65   2            //lan nhap thu 2
-  66   2            if(SingleTimeInput==2)
-  67   2            {
-  68   3              show_button(*button);
-  69   3      
-  70   3              if((*button != 4)&&(*button !=8)&&(*button != 12)&&(*button != 16)&&(*button != 15)&&(*button != 13))
-  71   3              {
-  72   4                num_generator(*button,OperandPointer);
-  73   4              }
-  74   3            }
-  75   2            //lan nhap thu 3
-  76   2            if(SingleTimeInput==3)
-  77   2            {
-  78   3              show_button(*button);
-  79   3              if((*button == 12))
-  80   3              {
-  81   4                OperandPointer = &Min;
-  82   4              }
-  83   3              if((*button != 4)&&(*button !=8)&&(*button != 12)&&(*button != 16)&&(*button != 15)&&(*button != 13))
-  84   3              {
-  85   4                num_generator(*button,OperandPointer);
-  86   4      
-  87   4              }
-  88   3            }
-  89   2            //lan nhap thu 4
-  90   2            if(SingleTimeInput==4)
-  91   2            {
-  92   3              show_button(*button);
-  93   3      
-  94   3              if((*button != 4)&&(*button !=8)&&(*button != 12)&&(*button != 16)&&(*button != 15)&&(*button != 13))
-  95   3              {
-  96   4                num_generator(*button,OperandPointer);
-  97   4              }
-  98   3            }
-  99   2            //lan nhap thu 5
- 100   2            if(SingleTimeInput==5)
- 101   2            {
- 102   3              show_button(*button);
- 103   3              if((*button != 4)&&(*button !=8)&&(*button != 12)&&(*button != 16)&&(*button != 15)&&(*button != 13))
- 104   3              {
- 105   4                num_generator(*button,OperandPointer);
- 106   4              }
- 107   3            }
- 108   2            //lan nhap thu 6
- 109   2            if(SingleTimeInput==6)
- 110   2            {
- 111   3              show_button(*button);
- 112   3              if((*button == 12))
- 113   3              {
- 114   4                OperandPointer = &Sec;
- 115   4              }
-C51 COMPILER V9.60.7.0   MAIN                                                              04/25/2023 21:57:25 PAGE 3   
+  54   2            if(SingleTimeInput==1)
+  55   2            {
+  56   3              show_button(*button);
+  57   3      
+  58   3              if((*button != 4)&&(*button !=8)&&(*button != 12)&&(*button != 16)&&(*button != 15)&&(*button != 13))
+  59   3              {
+  60   4                num_generator(*button,OperandPointer);
+  61   4              }
+  62   3            }
+  63   2            //lan nhap thu 2
+  64   2            if(SingleTimeInput==2)
+  65   2            {
+  66   3              show_button(*button);
+  67   3      
+  68   3              if((*button != 4)&&(*button !=8)&&(*button != 12)&&(*button != 16)&&(*button != 15)&&(*button != 13))
+  69   3              {
+  70   4                num_generator(*button,OperandPointer);
+  71   4              }
+  72   3            }
+  73   2            //lan nhap thu 3
+  74   2            if(SingleTimeInput==3)
+  75   2            {
+  76   3              show_button(*button);
+  77   3              if((*button == 12))
+  78   3              {
+  79   4                OperandPointer = &Min;
+  80   4              }
+  81   3            }
+  82   2            //lan nhap thu 4
+  83   2            if(SingleTimeInput==4)
+  84   2            {
+  85   3              show_button(*button);
+  86   3      
+  87   3              if((*button != 4)&&(*button !=8)&&(*button != 12)&&(*button != 16)&&(*button != 15)&&(*button != 13))
+  88   3              {
+  89   4                num_generator(*button,OperandPointer);
+  90   4              }
+  91   3            }
+  92   2            //lan nhap thu 5
+  93   2            if(SingleTimeInput==5)
+  94   2            {
+  95   3              show_button(*button);
+  96   3              if((*button != 4)&&(*button !=8)&&(*button != 12)&&(*button != 16)&&(*button != 15)&&(*button != 13))
+  97   3              {
+  98   4                num_generator(*button,OperandPointer);
+  99   4              }
+ 100   3            }
+ 101   2            //lan nhap thu 6
+ 102   2            if(SingleTimeInput==6)
+ 103   2            {
+ 104   3              show_button(*button);
+ 105   3              if((*button == 12))
+ 106   3              {
+ 107   4                OperandPointer = &Sec;
+ 108   4              }
+ 109   3              //if((*button != 4)&&(*button !=8)&&(*button != 12)&&(*button != 16)&&(*button != 15)&&(*button != 13)
+             -)
+ 110   3              //{
+ 111   3              //  num_generator(*button,OperandPointer);
+ 112   3              //}
+ 113   3            }
+ 114   2            //lan nhap thu 7
+C51 COMPILER V9.60.7.0   MAIN                                                              04/26/2023 23:03:42 PAGE 3   
 
- 116   3              if((*button != 4)&&(*button !=8)&&(*button != 12)&&(*button != 16)&&(*button != 15)&&(*button != 13))
- 117   3              {
- 118   4                num_generator(*button,OperandPointer);
- 119   4              }
- 120   3            }
- 121   2            //lan nhap thu 7
- 122   2            if(SingleTimeInput==7)
- 123   2            {
- 124   3              show_button(*button);
- 125   3              if((*button != 4)&&(*button !=8)&&(*button != 12)&&(*button != 16)&&(*button != 15)&&(*button != 13))
- 126   3              {
- 127   4                num_generator(*button,OperandPointer);
- 128   4              }
- 129   3            }
- 130   2            //lan nhap thu 8
- 131   2            if(SingleTimeInput==8)
- 132   2            {
- 133   3              show_button(*button);
- 134   3      
- 135   3              if((*button != 4)&&(*button !=8)&&(*button != 12)&&(*button != 16)&&(*button != 15)&&(*button != 13))
- 136   3              {
- 137   4                num_generator(*button,OperandPointer);
- 138   4                //TimeInput++;
- 139   4              }
- 140   3            }
- 141   2            if(SingleTimeInput==9)
- 142   2            {
- 143   3      
- 144   3              if(*button ==13)
- 145   3              {
- 146   4                SingleTimeInput=0;
- 147   4                loop = 1;
- 148   4                loop2 =1;
- 149   4                ds1307_SetTime(Convert(Hour),Convert(Min),Convert(Sec)); 
- 150   4                lcd_Clear();
- 151   4                Mode = 0;
- 152   4              }
- 153   3            }     
- 154   2      
- 155   2          *button = 0;
- 156   2          delay_ms(200);
- 157   2          }
- 158   1          
- 159   1      }
- 160          
- 161          /* main program */
- 162          void main() 
- 163          {
- 164   1          
- 165   1          unsigned char sec,min,hour,day,month,year;
- 166   1      
- 167   1          unsigned char button;
- 168   1          EA  = 1;    //cho phep ngat toan cuc
- 169   1          EX0 = 1;    //chon ngat ngoai INT1
- 170   1          IT0 = 1;    //chon ngat canh xuong
- 171   1          lcd_Init();
- 172   1          ds1307_Init();
- 173   1      
- 174   1          while(1)
- 175   1          {
- 176   2            if(Mode ==0)
- 177   2            {
-C51 COMPILER V9.60.7.0   MAIN                                                              04/25/2023 21:57:25 PAGE 4   
+ 115   2            if(SingleTimeInput==7)
+ 116   2            {
+ 117   3              show_button(*button);
+ 118   3              if((*button != 4)&&(*button !=8)&&(*button != 12)&&(*button != 16)&&(*button != 15)&&(*button != 13))
+ 119   3              {
+ 120   4                num_generator(*button,OperandPointer);
+ 121   4              }
+ 122   3            }
+ 123   2            //lan nhap thu 8
+ 124   2            if(SingleTimeInput==8)
+ 125   2            {
+ 126   3              show_button(*button);
+ 127   3      
+ 128   3              if((*button != 4)&&(*button !=8)&&(*button != 12)&&(*button != 16)&&(*button != 15)&&(*button != 13))
+ 129   3              {
+ 130   4                num_generator(*button,OperandPointer);
+ 131   4                //TimeInput++;
+ 132   4              }
+ 133   3            }
+ 134   2            if(SingleTimeInput==9)
+ 135   2            {
+ 136   3      
+ 137   3              if(*button ==13)
+ 138   3              {
+ 139   4                SingleTimeInput=0;
+ 140   4                loop = 1;
+ 141   4                loop2 =1;
+ 142   4                ds1307_SetTime(Convert(Hour),Convert(Min),Convert(Sec)); 
+ 143   4                Hour = 0;
+ 144   4                Min = 0;
+ 145   4                Sec = 0;
+ 146   4                OperandPointer = &Hour;
+ 147   4                lcd_Clear();
+ 148   4                Mode = 0;
+ 149   4              }
+ 150   3            }     
+ 151   2      
+ 152   2          *button = 0;
+ 153   2          delay_ms(200);
+ 154   2          }
+ 155   1          
+ 156   1      }
+ 157          
+ 158          /* main program */
+ 159          void main() 
+ 160          {
+ 161   1          
+ 162   1          unsigned char sec,min,hour,day,month,year;
+ 163   1      
+ 164   1          unsigned char button;
+ 165   1          EA  = 1;    //cho phep ngat toan cuc
+ 166   1          EX0 = 1;    //chon ngat ngoai INT1
+ 167   1          IT0 = 1;    //chon ngat canh xuong
+ 168   1          lcd_Init();
+ 169   1          ds1307_Init();
+ 170   1      
+ 171   1          while(1)
+ 172   1          {
+ 173   2            if(Mode ==0)
+ 174   2            {
+ 175   3              ModeWatchTime(sec,min,hour,day,month,year);
+ 176   3            }
+C51 COMPILER V9.60.7.0   MAIN                                                              04/26/2023 23:03:42 PAGE 4   
 
- 178   3              ModeWatchTime(sec,min,hour,day,month,year);
- 179   3            }
- 180   2            if(Mode == 1)
- 181   2            {
- 182   3              ModeSetTime(&button);
- 183   3            }
- 184   2            if(Mode > 1)
- 185   2            {
- 186   3              Mode = 0;
- 187   3            }
- 188   2          }
- 189   1      }
- 190          void ISR_EX0 (void) interrupt 0
- 191          {
- 192   1        Mode++;
- 193   1      } 
+ 177   2            if(Mode == 1)
+ 178   2            {
+ 179   3              ModeSetTime(&button);
+ 180   3            }
+ 181   2            if(Mode > 1)
+ 182   2            {
+ 183   3              Mode = 0;
+ 184   3            }
+ 185   2          }
+ 186   1      }
+ 187          void ISR_EX0 (void) interrupt 0
+ 188          {
+ 189   1        Mode++;
+ 190   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   1069    ----
+   CODE SIZE        =   1010    ----
    CONSTANT SIZE    =     31    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

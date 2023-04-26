@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   LCD                                                               04/25/2023 21:50:16 PAGE 1   
+C51 COMPILER V9.60.7.0   LCD                                                               04/26/2023 13:57:12 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE LCD
@@ -62,108 +62,104 @@ line level    source
   52          {
   53   1         dataport=(a & 0xf0);        
   54   1           rs=1;                      
-C51 COMPILER V9.60.7.0   LCD                                                               04/25/2023 21:50:16 PAGE 2   
+C51 COMPILER V9.60.7.0   LCD                                                               04/26/2023 13:57:12 PAGE 2   
 
   55   1           rw=0;                      
   56   1           en=1;                      
   57   1          delay_us(1);
   58   1           en=0;
-  59   1       
-  60   1         delay_us(1);                
-  61   1       
-  62   1         dataport=((a <<4) & 0xf0);  
-  63   1           rs=1;                    
-  64   1           rw=0;                     
-  65   1           en=1;                      
-  66   1          delay_us(1);
-  67   1           en=0;
-  68   1       
-  69   1         delay_us(1);
-  70   1       
-  71   1      }
-  72          
-  73           
-  74           //lcd gotolinetwo fuction
-  75          void lcd_Line_posnY()
+  59   1         delay_us(1);                
+  60   1         dataport=((a <<4) & 0xf0);  
+  61   1           rs=1;                    
+  62   1           rw=0;                     
+  63   1           en=1;                      
+  64   1          delay_us(1);
+  65   1           en=0;
+  66   1         delay_us(1);
+  67   1      }
+  68          
+  69           
+  70           //lcd gotolinetwo fuction
+  71          void lcd_Line_posnY()
+  72          {
+  73   1         lcd_WriteCmd(LineTwo);   // move the Cursor to Second line First Position
+  74   1      }
+  75          void lcd_Line_posnX()
   76          {
-  77   1         lcd_WriteCmd(LineTwo);   // move the Cursor to Second line First Position
+  77   1         lcd_WriteCmd(LineOne);   // move the Cursor to First line First Position
   78   1      }
-  79          void lcd_Line_posnX()
-  80          {
-  81   1         lcd_WriteCmd(LineOne);   // move the Cursor to First line First Position
-  82   1      }
-  83           
-  84           
-  85           
-  86          //lcd go to X(first row), Y(second row) line
-  87          void lcd_curser_posn(char row, char col)
-  88          {
-  89   1         char pos;
-  90   1       
-  91   1          if(row<LCDMaxLines)
-  92   1            {
-  93   2               pos= LineOne | (row << 6);
+  79           
+  80           
+  81           
+  82          //lcd go to X(first row), Y(second row) line
+  83          void lcd_curser_posn(char row, char col)
+  84          {
+  85   1         char pos;
+  86   1       
+  87   1          if(row<LCDMaxLines)
+  88   1            {
+  89   2               pos= LineOne | (row << 6);
+  90   2                                          
+  91   2       
+  92   2              if(col<LCDMaxChars)
+  93   2                 pos= pos+col;            
   94   2                                          
   95   2       
-  96   2              if(col<LCDMaxChars)
-  97   2                 pos= pos+col;            
-  98   2                                          
-  99   2       
- 100   2               lcd_WriteCmd(pos);        
- 101   2             }
- 102   1      }
- 103           
- 104          
- 105          //lcd display string function
- 106          void lcd_DisplayString(char *string_ptr)
- 107          {
- 108   1         while(*string_ptr)
- 109   1          lcd_Writedata(*string_ptr++);
- 110   1      }
- 111          
- 112           
- 113          //lcd display rtc time function
- 114          void lcd_DisplayRtcTime(char hour,char min,char sec)
- 115          {
- 116   1          lcd_Writedata(((hour>>4) & 0x0f) + 0x30);
-C51 COMPILER V9.60.7.0   LCD                                                               04/25/2023 21:50:16 PAGE 3   
+  96   2               lcd_WriteCmd(pos);        
+  97   2             }
+  98   1      }
+  99           
+ 100          
+ 101          //lcd display string function
+ 102          void lcd_DisplayString(char *string_ptr)
+ 103          {
+ 104   1         while(*string_ptr)
+ 105   1          lcd_Writedata(*string_ptr++);
+ 106   1      }
+ 107          
+ 108           
+ 109          //lcd display rtc time function
+ 110          void lcd_DisplayRtcTime(char hour,char min,char sec)
+ 111          {
+ 112   1          lcd_Writedata(((hour>>4) & 0x0f) + 0x30);
+ 113   1          lcd_Writedata((hour & 0x0f) + 0x30);
+ 114   1          lcd_Writedata(':');
+ 115   1       
+ 116   1          lcd_Writedata(((min>>4) & 0x0f) + 0x30);
+C51 COMPILER V9.60.7.0   LCD                                                               04/26/2023 13:57:12 PAGE 3   
 
- 117   1          lcd_Writedata((hour & 0x0f) + 0x30);
+ 117   1          lcd_Writedata((min & 0x0f) + 0x30);
  118   1          lcd_Writedata(':');
  119   1       
- 120   1          lcd_Writedata(((min>>4) & 0x0f) + 0x30);
- 121   1          lcd_Writedata((min & 0x0f) + 0x30);
- 122   1          lcd_Writedata(':');
- 123   1       
- 124   1          lcd_Writedata(((sec>>4) & 0x0f) + 0x30);
- 125   1          lcd_Writedata((sec & 0x0f) + 0x30);
- 126   1       
- 127   1       }
- 128           
- 129           
- 130           // lcd display rtc date function
- 131          void lcd_DisplayRtcDate(char day,char month,char year)
- 132           {
- 133   1           lcd_Writedata(((day>>4) & 0x0f) + 0x30);
- 134   1           lcd_Writedata((day & 0x0f) + 0x30);
+ 120   1          lcd_Writedata(((sec>>4) & 0x0f) + 0x30);
+ 121   1          lcd_Writedata((sec & 0x0f) + 0x30);
+ 122   1       
+ 123   1       }
+ 124           
+ 125           
+ 126           // lcd display rtc date function
+ 127          void lcd_DisplayRtcDate(char day,char month,char year)
+ 128           {
+ 129   1           lcd_Writedata(((day>>4) & 0x0f) + 0x30);
+ 130   1           lcd_Writedata((day & 0x0f) + 0x30);
+ 131   1           lcd_Writedata('/');
+ 132   1       
+ 133   1           lcd_Writedata(((month>>4) & 0x0f) + 0x30);
+ 134   1           lcd_Writedata((month & 0x0f) + 0x30);
  135   1           lcd_Writedata('/');
  136   1       
- 137   1           lcd_Writedata(((month>>4) & 0x0f) + 0x30);
- 138   1           lcd_Writedata((month & 0x0f) + 0x30);
- 139   1           lcd_Writedata('/');
- 140   1       
- 141   1           lcd_Writedata(((year>>4) & 0x0f) + 0x30);
- 142   1           lcd_Writedata((year & 0x0f) + 0x30);
- 143   1       
- 144   1       }
- 145           
- 146           
- 147          
- 148           void lcd_Clear()
- 149          {
- 150   1          lcd_WriteCmd(0x01);
- 151   1      }
- 152           
+ 137   1           lcd_Writedata(((year>>4) & 0x0f) + 0x30);
+ 138   1           lcd_Writedata((year & 0x0f) + 0x30);
+ 139   1       
+ 140   1       }
+ 141           
+ 142           
+ 143          
+ 144           void lcd_Clear()
+ 145          {
+ 146   1          lcd_WriteCmd(0x01);
+ 147   1      }
+ 148           
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE

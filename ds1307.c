@@ -32,7 +32,7 @@ void ds1307_Init()
     i2c_Write(dat);   
     i2c_Clock();
 }
- 
+
 unsigned char ds1307_Read()
 {
     unsigned char dat;
